@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import TrainingList from "./components/TrainingList";
+import CustomerList from "./components/CustomerList";
+import TopNav from "./components/TopNav";
+import Grid from "@material-ui/core/Grid";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useStyles } from "./components/styles/Styles";
+import CalendarComponent from "./components/CalendarComponent.js";
 
-function App() {
+export default function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Grid container className={classes.app}>
+          <Grid item xs={12}>
+            <div className="App">
+              <Route path="/customers" component={CustomerList} />
+              <Route path="/trainings" component={TrainingList} />
+              <Route path="/calendar" component={CalendarComponent} />
+            </div>
+          </Grid>
+          <Grid item xs={12}>
+            <TopNav />
+          </Grid>
+        </Grid>
+      </Switch>
+    </Router>
   );
 }
-
-export default App;
